@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'dart:async'; // Add this line to import the Timer class
 import 'package:flutter/material.dart';
 import 'package:weather/models/weather_model.dart';
 import 'package:weather/services/weather_service.dart';
@@ -67,6 +68,11 @@ class _WeatherPageState extends State<WeatherPage> {
   void initState() {
     super.initState();
     _fetchWeather();
+
+    // Schedule periodic updates every minute
+    Timer.periodic(const Duration(minutes: 1), (Timer timer) {
+      _fetchWeather();
+    });
   }
 
   @override
